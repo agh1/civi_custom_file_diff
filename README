@@ -1,0 +1,30 @@
+CiviCRM Custom File Diff Tool
+
+This is a simple script for identifying the customizations you have made to CiviCRM templates and code.  This is useful to run in advance of upgrades: the resulting file can be used for reapplying your changes to upgraded versions of the files.
+
+How to Set Up
+-------------
+
+The default settings presume you have a Drupal site with the custom files in 
+   sites/default/files/civicrm/customtemplates and 
+   sites/default/files/civicrm/customphp
+
+This folder is presumed to have the same parent folder as the web root, assumed to be public_html.
+
+You can see examples for WordPress and Joomla!, as well.  Edit the settings appropriately to your installation.
+
+How to Run
+----------
+
+Simply enter from the command line
+   ./civi_custom_file_diff
+from this folder.  Two new files will be created showing the differences in template and PHP files
+
+Other Uses
+----------
+
+Already upgraded but still need to find what changes have been made as compared to the old version?  Just download a fresh copy of the old version, untar it somewhere, and edit the civicrmcode line to point to it.
+
+Checking an extension you wrote that overrides templates or other code?  Edit the customtemplates and customphp lines to point to your extension's templates or code:
+public_html/sites/default/files/civicrm/extensions/yourextension/templates for the templates and
+public_html/sites/default/files/civicrm/extensions/yourextension for the PHP.

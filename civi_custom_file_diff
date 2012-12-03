@@ -1,0 +1,26 @@
+#!/bin/bash
+
+# Enter the path from this script to the custom templates folder
+# Drupal: ../public_html/sites/default/files/civicrm/customtemplates
+# WordPress: ../public_html/wp-content/plugins/files/civicrm/customtemplates
+# Joomla!: ../public_html/media/civicrm/customtemplates
+customtemplates=../public_html/sites/default/files/civicrm/customtemplates
+
+# Enter the path from this script to the custom PHP folder
+# Drupal: ../public_html/sites/default/files/civicrm/customphp
+# WordPress: ../public_html/wp-content/plugins/files/civicrm/customphp
+# Joomla!: ../public_html/media/civicrm/customphp
+customphp=../public_html/sites/default/files/civicrm/customphp
+
+# Enter the path from this script to the CiviCRM module folder
+# Drupal: ../public_html/sites/all/modules/civicrm
+# WordPress: ../public_html/wp-content/plugins/civicrm
+# Joomla!: ../public_html/administrator/components/com_civicrm/civicrm
+civicrmcode=../public_html/sites/all/modules/civicrm
+
+# The format to save the diff file in
+difffile=alldiffs-`date +%F`.diff;
+
+# Running the actual diffs
+diff -r -u $civicrmcode/templates $customtemplates | sed '/^Only in/d' > template-$difffile
+diff -r -u $civicrmcode $customphp | sed '/^Only in/d' > php-$difffile
