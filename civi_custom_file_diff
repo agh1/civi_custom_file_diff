@@ -18,9 +18,51 @@ customphp=../public_html/sites/default/files/civicrm/customphp
 # Joomla!: ../public_html/administrator/components/com_civicrm/civicrm
 civicrmcode=../public_html/sites/all/modules/civicrm
 
+# Enter the patch from this script to an unzipped new version of CiviCRM
+# This will be the source of the new template files
+# Drupal: wherever/civicrm
+# WordPress: wherever/civicrm/civicrm
+# Joomla: wherever/com_civicrm/admin/civicrm
+#   (unzip civicrm.zip that you find there)
+newversion=../civicrm
+
 # The format to save the diff file in
 difffile=alldiffs-`date +%F`.diff;
+
+# The format to save the series of copy commands to
+copylistfile=copylist-`date +%F`.txt
+
+# The format of the folder with your new custom template files
+copydir=customtemplates-`date +%F`.txt
+
+# The format of the folder with your new custom PHP files
+copyphpdir=customphp-`date +%F`.txt
 
 # Running the actual diffs
 diff -r -u $civicrmcode/templates $customtemplates | sed '/^Only in/d' > template-$difffile
 diff -r -u $civicrmcode $customphp | sed '/^Only in/d' > php-$difffile
+
+# Copy the new versions of the files to folders for upgrading
+
+oldwd=`pwd`;
+
+cd $customtemplates;
+
+mkdir -p $oldwd/$copydir;
+
+cp -r * $oldwd/$copydir;
+
+find * -type f -exec cp $oldwd/$newversion/templates/'{}' $oldwd/$copydir/'{}' \; ;
+
+cd $oldwd;
+
+cd $customphp;
+
+mkdir -p $oldwd/$copyphpdir;
+
+cp -r * $oldwd/$copyphpdir;
+
+find * -type f -exec cp $oldwd/$newversion/'{}' $oldwd/$copyphpdir/'{}' \; ;
+
+cd $oldwd;
+
