@@ -1,35 +1,68 @@
 CiviCRM Custom File Diff Tool
 
-This is a simple script for identifying the customizations you have made to CiviCRM templates and code.  This is useful to run in advance of upgrades: the resulting file can be used for reapplying your changes to upgraded versions of the files.
+This is a simple script for identifying the customizations you have
+made to CiviCRM templates and code.  This is useful to run in advance
+of upgrades: the resulting file can be used for reapplying your changes
+to upgraded versions of the files.
 
 How to Set Up
 -------------
 
-The default settings presume you have a Drupal site with the custom files in 
-  sites/default/files/civicrm/customtemplates and 
+The default settings presume you have a Drupal site with the custom
+files in
+
+  sites/default/files/civicrm/customtemplates 
+  
+and
+  
   sites/default/files/civicrm/customphp
 
-This folder is presumed to have the same parent folder as the web root, assumed to be public_html.
+This folder is presumed to have the same parent folder as the web root,
+assumed to be public_html.
 
-You can see examples for WordPress and Joomla!, as well.  Edit the settings appropriately to your installation.
+You can see examples for WordPress and Joomla!, as well.  Edit the
+settings appropriately to your installation.
 
-You will also need to download a new copy of CiviCRM, untar it, and tell the script where it is.  The comments above the newversion setting show the appropriate paths for each CMS' version.  This will be the source of the new template and PHP files.
+You will also need to download a new copy of CiviCRM, untar it, and tell
+the script where it is.  The comments above the newversion setting show
+the appropriate paths for each CMS' version.  This will be the source
+of the new template and PHP files.
 
 How to Run
 ----------
 
 Simply enter from the command line
+
   ./civi_custom_file_diff
-from this folder.  Two new patch files will be created showing the differences in template and PHP files.  Two new directories will be created.  They will have the original file from the new version of CiviCRM that corresponds to each customized file from your existing site.  Any other files in the directories are copied directly from your existing site.  You can apply your patches to these:
-  cd customtemplates-2012-12-03
-  patch -p7 < template-alldiffs-2012-12-03
+  
+from this folder.  Two new patch files will be created showing the
+differences in template and PHP files.  Two new directories will be
+created.  They will have the original file from the new version of
+CiviCRM that corresponds to each customized file from your existing
+site.  Any other files in the directories are copied directly from your
+existing site.  You can apply your patches to these:
+
+  cd customtemplates-2012-12-03 patch -p7 < template-alldiffs-2012-12-03
+  
 and likewise for the custom PHP.
 
 Other Uses
 ----------
 
-Already upgraded but still need to find what changes have been made as compared to the old version?  Just download a fresh copy of the old version, untar it somewhere, edit the civicrmcode line to point to it, and edit the newversion line to point to your new version.
+Already upgraded but still need to find what changes have been made
+as compared to the old version?  Just download a fresh copy of the old
+version, untar it somewhere, edit the civicrmcode line to point to it,
+and edit the newversion line to point to your new version.
 
-Checking an extension you wrote that overrides templates or other code?  Edit the customtemplates and customphp lines to point to your extension's templates or code:
-  public_html/sites/default/files/civicrm/extensions/yourextension/templates for the templates and
-  public_html/sites/default/files/civicrm/extensions/yourextension for the PHP.
+Checking an extension you wrote that overrides templates or other code?
+Edit the customtemplates and customphp lines to point to your extension's
+templates or code:
+
+  public_html/sites/default/files/civicrm/extensions/yourextension/templates
+  
+for the templates and
+
+  public_html/sites/default/files/civicrm/extensions/yourextension
+  
+for the PHP.
+
